@@ -30,7 +30,7 @@
                          (assoc :path path
                                 :resource resource
                                 :httpMethod method
-                                :pathParameters path-params
+                                :pathParameters (or path-params {})
                                 :queryStringParameters query-params
                                 :multiValueQueryStringParameters (update-vals query-params
                                                                               (fn [v]
@@ -55,4 +55,7 @@
                            :path-params {"accountId" "fred"
                                          "proxy" "math/plus"}
                            :method "GET"})
-      #_(json/generate-string)))
+      #_(json/generate-string))
+
+  (api-gw-proxy-event {:resource "/accounts/math/plus"
+                       :method "GET"}))

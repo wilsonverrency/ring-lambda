@@ -9,7 +9,7 @@
    :event - the lambda input
    :context - an instance of a lambda context
               http://docs.aws.amazon.com/lambda/latest/dg/java-context-object.html"
-  [event context proxy-key]
+  [event context]
   (let [[http-version host]
         (s/split (get-in event [:headers :Via] "") #" ")]
     {:server-port
@@ -19,7 +19,7 @@
      :body           (get event :body)
      :server-name    host
      :remote-addr    (get event :sourceIp "")
-     :uri            (str "/" (get-in event [:pathParameters proxy-key]))
+     :uri            (get event :path)
      :query-string   (codec/form-encode (get event :queryStringParameters {}))
      :scheme         (keyword
                       (get-in event [:headers :X-Forwarded-Proto]))
