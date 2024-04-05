@@ -21,11 +21,10 @@ RUN mkdir /opt/app
 # Change the name of the source jar file (this should be the uberjar from the project)
 COPY --from=builder /usr/src/app/target/ring-lambda-standalone.jar /opt/app/app.jar
 
-COPY ./entry_script.sh /entry_script.sh
-RUN chmod +x /entry_script.sh
-ADD aws-lambda-rie /usr/local/bin/aws-lambda-rie
+COPY entry_script.sh aws-lambda-rie /opt/app/
+RUN chmod +x /opt/app/entry_script.sh /opt/app/aws-lambda-rie
 
 # Change the classname and handler method below
-ENTRYPOINT [ "/entry_script.sh", "ring_lambda.core::handleRequest" ]
+ENTRYPOINT [ "/opt/app/entry_script.sh", "ring_lambda.core" ]
 
-# CMD ["ring_lambda.core::handleRequest"]
+EXPOSE 8080

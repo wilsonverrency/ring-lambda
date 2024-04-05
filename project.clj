@@ -6,8 +6,11 @@
   :dependencies [[org.clojure/clojure "1.11.2"]
                  [cheshire "5.13.0"]
                  [com.amazonaws/aws-lambda-java-runtime-interface-client "2.5.0"]
+                 [metosin/reitit "0.6.0"]
                  [ring/ring-codec "1.2.0"]]
   :repl-options {:init-ns ring-lambda.core}
-  :profiles {:uberjar {:aot :all}}
+  :profiles {:dev {:dependencies [[ring/ring-mock "0.4.0"]]
+                   :resource-paths ["test-resources"]}
+             :uberjar {:aot :all}}
   :jar-name "ring-lambda.jar"
   :uberjar-name "ring-lambda-standalone.jar")

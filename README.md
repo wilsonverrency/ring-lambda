@@ -1,13 +1,41 @@
 # ring-lambda
 
-A Clojure library designed to ... well, that part is up to you.
+A ring lambda handler with reitit routes.
+
+### Dockerfile
+
+1. Change the name of the project in project.clj (this will decide the name of the standalone jar)
+2. Change the path of the standaalone jar in the Dockerfile
+3. Change the classname and handler method in the Dockerfile
+
+## Testing the container locally
+
+- https://docs.aws.amazon.com/lambda/latest/dg/images-test.html#images-test-add
+
+```bash
+## build a local image
+docker build . -t ring-lambda:latest
+```
+
+```bash
+## run the container locally
+docker run --rm -p 9000:8080 ring-lambda:latest
+```
+
+```bash
+curl "http://localhost:9000/2015-03-31/functions/function/invocations" \
+ -H "Content-Type: application/json" \
+ --data-binary "@test-resources/sample-apigw-event.json"
+```
 
 ## References
 
 - https://wtfleming.github.io/blog/clojure-aws-lambda/
 - https://sideshowcoder.com/2018/05/11/clojure-ring-api-gateway-lambda/
-
-FIXME
+- https://docs.aws.amazon.com/lambda/latest/dg/java-image.html#java-image-instructions
+- https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html
+- https://github.com/aws/aws-lambda-runtime-interface-emulator/
+- https://github.com/Quantisan/docker-clojure
 
 ## License
 
