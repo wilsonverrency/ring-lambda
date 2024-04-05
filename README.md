@@ -2,6 +2,13 @@
 
 A ring lambda handler with reitit routes.
 
+It is designed to handle API Gateway proxied requests where the resource is defined like `/dummy/{proxy+}`.
+
+The code for converting from api-gateway to ring request was borrowed from:
+
+- https://wtfleming.github.io/blog/clojure-aws-lambda/
+- https://sideshowcoder.com/2018/05/11/clojure-ring-api-gateway-lambda/
+
 ### Dockerfile
 
 1. Change the name of the project in project.clj (this will decide the name of the standalone jar)
@@ -30,8 +37,6 @@ curl "http://localhost:9000/2015-03-31/functions/function/invocations" \
 
 ## References
 
-- https://wtfleming.github.io/blog/clojure-aws-lambda/
-- https://sideshowcoder.com/2018/05/11/clojure-ring-api-gateway-lambda/
 - https://docs.aws.amazon.com/lambda/latest/dg/java-image.html#java-image-instructions
 - https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html
 - https://github.com/aws/aws-lambda-runtime-interface-emulator/
